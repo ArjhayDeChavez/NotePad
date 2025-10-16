@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="actions">
+        <a href="{{ url_for('note_routes.create_note') }}" class="new-btn">+ New Note</a>
+        <form method="get" action="/" class="search-bar">
+            <input type="text" name="q" placeholder="Search notes..." value="{{ query }}">
+        </form>
+    </div>
+
+    <div class="note-list">
+        {% for note in notes %}
+            <div class="note-card">
+                <a href="{{ url_for('note_routes.read_note', id=note.id) }}" class="note-title">{{ note.title }}</a>
+                <p class="note-date">{{ note.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+            </div>
+        {% else %}
+            <p>No notes found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

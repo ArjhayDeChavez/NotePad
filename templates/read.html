@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="note-view">
+    <h2>{{ note.title }}</h2>
+    <p class="note-date">{{ note.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    <div class="note-content">{{ note.content | replace('\n', '<br>') | safe }}</div>
+
+    <div class="note-actions">
+        <a href="{{ url_for('note_routes.edit_note', id=note.id) }}" class="btn edit">Edit</a>
+        <a href="{{ url_for('note_routes.delete_note', id=note.id) }}" class="btn delete" onclick="return confirm('Delete this note?');">Delete</a>
+        <a href="{{ url_for('note_routes.index') }}" class="btn back">← Back</a>
+    </div>
+</div>
+{% endblock %}
